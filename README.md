@@ -3,11 +3,14 @@ I built a home virtual Lab to safely allow me to practice on my SOC skills virtu
 
 --- 
 
-# Virtual Machines
+# Softwares used
 - VMware Fusion
 - Ubuntu Desktop
 - Windows 11
 - Kali Linux
 - wireshark
 --- 
+
+# Skills Learned
+- Virtualization
 
