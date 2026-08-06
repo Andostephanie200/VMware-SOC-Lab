@@ -33,12 +33,6 @@ Build a virtual cybersecurity lab for learning and practicing SOC Analyst skills
 
 ---
 
-## Lab Architecture
-
-- Diagram
-
----
-
 ## Skills Learned
 
 - Virtualization
