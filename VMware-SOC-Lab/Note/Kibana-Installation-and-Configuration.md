@@ -56,3 +56,39 @@ I verified the Ubuntu architecture using:
 
 ```bash
 uname -m
+---
+
+## Docker Verification
+
+Before deploying Kibana, I verified that Docker was installed and available on the Ubuntu virtual machine.
+
+```bash
+docker --version
+---
+
+## Troubleshooting
+
+During the lab, I encountered an issue when restarting the Kibana container.
+I first checked the container status using:
+sudo docker ps -a
+The Kibana container was still present but had stopped.
+When I attempted to restart it, Docker returned an error involving the Elasticsearch certificate path /tmp/http_ca.crt.
+I checked the path and discovered that it had become a directory instead of the certificate file expected by the container.
+I corrected the certificate path by restoring the Elasticsearch HTTP CA certificate and then restarted Kibana successfully.
+After troubleshooting, I verified the container again using:
+sudo docker ps
+Kibana returned to an Up status with port 5601 mapped correctly.
+---
+
+## What I Learned
+
+This troubleshooting process gave me practical experience with Docker container management, certificate paths, bind mounts, port mapping, and using error messages to identify configuration problems.
+---
+
+## Current Status
+
+Elasticsearch is installed and running on Ubuntu.
+Kibana 9.5.0 ARM64 is deployed through Docker.
+The Kibana container is running successfully.
+Port 5601 is mapped for Kibana.
+Kibana installation, verification, and troubleshooting are documented.
