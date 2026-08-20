@@ -38,7 +38,7 @@ Elasticsearch is a search and analytics engine that can be used to store, search
 
 For this lab, Elasticsearch provides a foundation for building a security monitoring and log-analysis environment.
 
-It will eventually be used alongside Kibana to provide a visual interface for analyzing security-related data.
+It is used alongside Kibana to provide a visual interface for exploring and analyzing security-related data within the lab environment.
 
 ---
 
