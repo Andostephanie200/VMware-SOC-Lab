@@ -1,140 +1,281 @@
-# VMware SOC Home Lab
+VMware SOC Home Lab
 
-## Project Overview
+Project Overview
 
-This project documents a hands-on cybersecurity home lab built using VMware Fusion on a MacBook Pro.
+This project documents a hands-on cybersecurity home lab built using VMware Fusion on a MacBook Pro. It provides an isolated environment for practicing system administration, network analysis, security monitoring, troubleshooting, and SOC investigation techniques without affecting my primary operating system.
 
-The lab provides an isolated environment for practicing cybersecurity, system administration, network analysis, and SOC (Security Operations Center) monitoring skills.
+The project currently includes an Elasticsearch and Kibana monitoring environment, multiple virtual machines, and a controlled SSH authentication-log investigation.
 
-The environment includes multiple virtual machines and security tools that allow me to safely practice security monitoring and investigation techniques without affecting my primary operating system.
+Project Goals
 
----
+The goals of this project are to:
 
-## Project Goal
+Build and maintain a practical SOC-style lab environment
 
-The goal of this project is to build and document a practical SOC-style environment where I can develop hands-on skills in:
+Collect and analyze security-related logs
 
-* Security monitoring
-* Log analysis
-* Network traffic analysis
-* SIEM concepts
-* Incident investigation
-* Linux administration
-* Windows security monitoring
-* Virtualization
-* Cybersecurity troubleshooting
+Practice network traffic analysis
 
----
+Develop incident investigation and documentation skills
 
-## Lab Environment
+Strengthen Linux and Windows administration skills
 
-The lab is hosted using VMware Fusion and includes the following virtual machines:
+Troubleshoot authentication, certificate, connectivity, and configuration problems
 
-* **Windows 11** — Windows endpoint used for security monitoring and testing
-* **Ubuntu Linux** — Linux environment hosting security monitoring components
-* **Kali Linux** — Security testing and analysis environment
+Lab Environment
 
-### Security Tools
+The lab is hosted in VMware Fusion and includes:
 
-* **Elasticsearch** — Used to store, search, and analyze security-related data and logs
-* **Wireshark** — Used for network traffic capture and packet analysis
-* **VMware Fusion** — Used to create and manage the virtualized lab environment
+Windows 11 — Endpoint used for security monitoring and testing
 
----
+Ubuntu Linux — Hosts Elasticsearch and provides Linux authentication logs
 
-## Architecture
+Kali Linux — Authorized security-testing and analysis system
 
-The lab architecture connects the virtual machines and security tools into a controlled environment for cybersecurity practice.
+Security Tools
 
-The architecture diagram can be found in the **Diagram** folder.
+Elasticsearch — Stores, searches, and analyzes security-related data
 
----
+Kibana — Provides a web interface for exploring and visualizing Elasticsearch data
 
-## Elasticsearch
+Docker — Runs and manages the Kibana container
 
-Elasticsearch was installed on the Ubuntu virtual machine as part of the lab's security monitoring environment.
+Wireshark — Captures and analyzes network traffic
 
-### Installation and Verification
+VMware Fusion — Creates and manages the virtualized lab environment
 
-The Elasticsearch installation was verified by:
+Architecture
 
-1. Checking the Elasticsearch system service.
-2. Confirming that the service was **active (running)**.
-3. Testing the Elasticsearch API through the local HTTPS endpoint.
-4. Authenticating using the Elasticsearch `elastic` account.
-5. Confirming that Elasticsearch returned cluster and version information.
+The virtual machines communicate within a controlled VMware network. In the SSH authentication exercise, Kali Linux acted as the authorized test system and Ubuntu acted as the monitored target.
 
-### Evidence
+System
 
-Screenshots documenting the Elasticsearch installation and verification process are available in the **screenshots** folder.
+Role
 
----
+Lab IP address
 
-## Wireshark
+Kali Linux
 
-Wireshark is used in this lab for network traffic analysis and packet inspection.
+Authorized test source
 
-It provides hands-on practice with:
+192.168.232.130
 
-* Packet capture
-* Protocol analysis
-* Network troubleshooting
-* Identifying unusual network activity
-* Understanding network communications
+Ubuntu Linux
 
----
+SSH target and log source
 
-## Skills Developed
+192.168.232.128
 
-Through building and troubleshooting this lab, I have developed hands-on experience with:
+Windows 11
 
-* VMware virtualization
-* Windows administration
-* Linux administration
-* Elasticsearch
-* Network traffic analysis
-* Wireshark
-* Security monitoring concepts
-* Log analysis
-* Troubleshooting
-* SOC environment design
-* Technical documentation
+Endpoint and Wireshark system
 
----
+Dynamic lab address
 
-## Project Documentation
+The complete architecture diagram is available in the Diagram folder.
 
-Additional documentation, diagrams, and screenshots are available in the repository:
+Elasticsearch Installation and Verification
 
-* **Diagram** — Lab architecture
-* **Note** — Project notes and technical documentation
-* **Screenshots** — Evidence from the lab setup and configuration
+Elasticsearch was installed on the Ubuntu virtual machine as the data-storage and search component of the monitoring environment.
 
----
+The installation was verified by:
 
-## Current Project Status
+Checking the Elasticsearch system service.
 
-### Completed
+Confirming that the service was active (running).
 
-* VMware Fusion lab environment
-* Windows 11 virtual machine
-* Ubuntu Linux virtual machine
-* Kali Linux virtual machine
-* Wireshark setup
-* Elasticsearch installation
-* Elasticsearch service verification
-* Elasticsearch API verification
-* GitHub project documentation
+Testing the local Elasticsearch HTTPS endpoint.
 
-### In Progress
+Authenticating with the elastic account.
 
-* Kibana setup
-* Security monitoring workflow
-* Log collection and analysis
-* SOC investigation exercises
+Confirming that the API returned cluster and version information.
 
----
+Screenshots showing the installation and verification process are available in the Screenshots folder.
 
-## Disclaimer
+Kibana Deployment and Troubleshooting
 
-This project is a controlled home laboratory created for educational and cybersecurity skill-development purposes.
+Kibana was deployed as a Docker container and connected to Elasticsearch. During configuration, Kibana could not connect correctly because the Elasticsearch certificate path was mounted as a directory instead of the required certificate file.
+
+Troubleshooting Process
+
+Reviewed the Kibana container status and logs.
+
+Identified a problem with the certificate-authority mount.
+
+Verified the location of Elasticsearch's http_ca.crt certificate.
+
+Corrected the Docker volume mapping so it referenced the certificate file.
+
+Configured Kibana to use the correct Elasticsearch host and certificate authority.
+
+Added the required Elasticsearch authentication settings.
+
+Restarted the Kibana container.
+
+Confirmed that the container remained running and that Kibana was reachable on port 5601.
+
+Result
+
+Kibana successfully connected to Elasticsearch after the certificate path and authentication configuration were corrected. This exercise strengthened my understanding of Docker volume mapping, TLS certificates, authentication, container logs, and service connectivity.
+
+SSH Authentication Log Analysis
+
+Objective
+
+The objective was to generate controlled SSH authentication activity and investigate the resulting Ubuntu logs as a SOC analyst would examine a possible login incident.
+
+Activity Performed
+
+Verified network connectivity between Kali Linux and Ubuntu.
+
+Attempted an authorized SSH login from Kali Linux to Ubuntu.
+
+Used the test username soc-test-user.
+
+Entered an incorrect password three times to generate failed authentication events.
+
+Reviewed Ubuntu's /var/log/auth.log file.
+
+Identified and recorded the source IP, target IP, username, timestamps, number of attempts, and authentication outcome.
+
+Investigation Findings
+
+Field
+
+Finding
+
+Event type
+
+Failed SSH authentication
+
+Source system
+
+Kali Linux
+
+Source IP
+
+192.168.232.130
+
+Target system
+
+Ubuntu Linux
+
+Target IP
+
+192.168.232.128
+
+Attempted username
+
+soc-test-user
+
+Number of failures
+
+3
+
+Approximate time
+
+22:59–23:00
+
+Investigation source
+
+/var/log/auth.log
+
+Classification
+
+Authorized lab testing
+
+Analysis
+
+The repeated failures from one source IP could resemble a small password-guessing attempt. However, the activity was expected, limited to three attempts, and performed by me in an isolated lab. It was therefore classified as authorized testing with no escalation required.
+
+In a production SOC, similar unexpected activity would require additional investigation, including reviewing the source reputation, searching for other affected accounts or systems, checking whether any later login succeeded, and determining whether containment or escalation was necessary.
+
+Wireshark
+
+Wireshark is used in this lab for:
+
+Packet capture
+
+Protocol analysis
+
+Network troubleshooting
+
+Identifying unusual network activity
+
+Understanding communication between lab systems
+
+Skills Developed
+
+VMware virtualization
+
+Linux and Windows administration
+
+Elasticsearch and Kibana fundamentals
+
+Docker container deployment and troubleshooting
+
+TLS certificate configuration
+
+Authentication troubleshooting
+
+SSH log analysis
+
+Source and target identification
+
+Security-event classification
+
+Network traffic analysis with Wireshark
+
+SOC investigation methodology
+
+Technical documentation
+
+Project Documentation
+
+Diagram — Lab architecture
+
+Note — Project notes and technical documentation
+
+Screenshots — Evidence of installation, configuration, troubleshooting, and analysis
+
+Sensitive information, including passwords and authentication credentials, is excluded or redacted from all screenshots.
+
+Project Status
+
+Completed
+
+VMware Fusion lab environment
+
+Windows 11, Ubuntu Linux, and Kali Linux virtual machines
+
+Wireshark setup
+
+Elasticsearch installation and API verification
+
+Kibana Docker deployment
+
+Kibana certificate and authentication troubleshooting
+
+Kali-to-Ubuntu network connectivity
+
+Controlled SSH authentication test
+
+Ubuntu authentication-log investigation
+
+Initial GitHub documentation
+
+Next Steps
+
+Install and configure Filebeat
+
+Send Ubuntu authentication logs to Elasticsearch
+
+Investigate the SSH events in Kibana
+
+Create a Kibana visualization or detection rule for repeated failed SSH logins
+
+Add investigation screenshots and a detailed incident report
+
+Disclaimer
+
+This project was completed in a controlled home laboratory for educational and cybersecurity skill-development purposes. All testing was authorized and limited to systems that I own and manage.
