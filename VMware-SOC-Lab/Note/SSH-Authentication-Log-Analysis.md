@@ -181,28 +181,18 @@ In a production environment, unexpected repeated failures would require further 
 
 ---
 
-## Evidence to Add
+## Evidence collected
+### Ubuntu SSH Authentication Logs
 
-The following screenshots should be stored in the repository's **Screenshots** folder:
+![Ubuntu authentication log showing failed SSH attempts](../screenshots/01-ubuntu-auth-log-evidence.png)
 
-1. Kali Linux successfully pinging Ubuntu
-2. The controlled SSH login attempt from Kali
-3. Ubuntu `/var/log/auth.log` showing the failed attempts
-4. Kibana container status and port mapping
-5. Kibana interface after the configuration repair
+### Kibana Container Status
 
-Passwords, tokens, certificates, and other sensitive values must be hidden before uploading screenshots.
+![Docker showing the Kibana container running on port 5601](../screenshots/02-kibana-container-running.png)
 
-Suggested filenames:
+### Working Kibana Interface
 
-```text
-01-kali-ping-ubuntu.png
-02-failed-ssh-test.png
-03-ubuntu-auth-log-evidence.png
-04-kibana-container-running.png
-05-kibana-interface.png
-```
-
+![Kibana interface successfully accessible through localhost](../screenshots/03-kibana-interface.png)
 ---
 
 ## Challenges and Resolutions
