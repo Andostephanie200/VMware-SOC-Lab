@@ -254,7 +254,7 @@ Project Documentation
 
 Diagram — Lab architecture
 
-- [Project notes](Note/) — installation, troubleshooting, lessons learned, and analysis notes
+- [Project notes](VMware-SOC-Lab/Note/) — installation, troubleshooting, lessons learned, and analysis notes
   
 Screenshots — Evidence of installation, configuration, troubleshooting, and analysis
 
