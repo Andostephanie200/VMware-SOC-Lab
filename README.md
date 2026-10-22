@@ -248,7 +248,7 @@ Detect repeated Windows failed logons (Event ID 4625) in the Active Directory la
 ### Validation
 I generated failed logons in the lab and confirmed that the events triggered the rule. Kibana displayed two medium severity alerts for `DC01.cyberlab.local`, at 4:47 AM and 5:36 AM on October 22, 2026.
 
-![Kibana failed logon alerts](screenshots/failed-logon-alerts.png)
+![Kibana failed logon alerts](VMware-SOC-Lab/screenshots/failed-logon-alerts.png)
 
 Project Documentation
 
