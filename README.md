@@ -279,3 +279,20 @@ Add investigation screenshots and a detailed incident report
 Disclaimer
 
 This project was completed in a controlled home laboratory for educational and cybersecurity skill-development purposes. All testing was authorized and limited to systems that I own and manage.
+## Failed Windows Logon Detection
+
+### Objective
+Detect repeated Windows failed logons (Event ID 4625) in the Active Directory lab and generate a Kibana alert.
+
+### Rule configuration
+- Query: `event.code: "4625"`
+- Threshold: 5 or more matching events
+- Grouped by: `host.name`
+- Schedule: every 5 minutes
+- Additional look-back: 1 day
+- Severity: Medium
+
+### Validation
+I generated failed logons in the lab and confirmed that the events triggered the rule. Kibana displayed two medium severity alerts for `DC01.cyberlab.local`, at 4:47 AM and 5:36 AM on October 22, 2026.
+
+![Kibana failed logon alerts](screenshots/failed-logon-alerts.png)
