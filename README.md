@@ -254,8 +254,8 @@ Project Documentation
 
 Diagram — Lab architecture
 
-Note — Project notes and technical documentation
-
+- [Project notes](Note/) — installation, troubleshooting, lessons learned, and analysis notes
+  
 Screenshots — Evidence of installation, configuration, troubleshooting, and analysis
 
 Sensitive information, including passwords and authentication credentials, is excluded or redacted from all screenshots.
